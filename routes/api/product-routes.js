@@ -41,21 +41,21 @@ router.get('/:id', (req, res) => {
       },
       {
         model: Tag,
-        attributes: 'tag_name'
+        attributes: ['tag_name']
       }
     ]
   })
-  .then(dbProductData => {
-    if(!dbProductData) {
-      res.status(404).json({message: 'No product found with this id'});
-      return;
-    }
-    res.json(dbProductData);
-  })
-  .catch(err => {
-    console.log(err);
-    res.json(500).json(err);
-  });
+    .then(dbProductData => {
+      if (!dbProductData) {
+        res.status(404).json({message: 'No product found with this id'});
+        return;
+      }
+      res.json(dbProductData);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 // create new product
